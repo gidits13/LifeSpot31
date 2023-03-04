@@ -1,0 +1,51 @@
+<div id = "dd" class = "imgblock">
+
+    <div class="img">
+        <img src="../../Static/IMG/london.jpg" style="width: 100%;" />
+    </div>
+    <div class="img">
+        <img src="../../Static/IMG/ny.jpg" style="width: 100%;" />
+    </div>
+    <div class="img">
+        <img src="../../Static/IMG/spb.jpg" style="width: 100%;" />
+    </div>
+    <a class="prev" onclick="back()" ondragend="back"">Back</a>
+    <a class="next" onclick="next()">Next</a>
+</div>
+<script  defer defertype="text/javascript">
+let isDown = false;
+let startX;
+let scrollLeft;
+let x;
+function onDown(event){
+    dd.style.cursor="grabbing";
+    isDown=true;
+    console.log(event);
+    scrollLeft=dd.scrollLeft;
+    console.log(scrollLeft);
+    startX=event.pageX - dd.offsetLeft;
+    console.log(startX);
+}
+dd.addEventListener("mousedown", (e)=>onDown(event));
+dd.addEventListener("mouseleave",()=>{
+    isDown=false;
+    console.log(isDown);
+
+});
+dd.addEventListener("mouseup",()=>{
+    isDown=false;
+    console.log(isDown);
+    if(x-startX>50)
+    next();
+    if(x-startX<-50)
+    back();
+});
+dd.addEventListener("mousemove", (e)=>{
+    e.preventDefault();
+    if (!isDown) return;
+    // console.count(isDown);
+    x = e.pageX - dd.offsetLeft;
+    console.log(x);
+});
+</script>
+
